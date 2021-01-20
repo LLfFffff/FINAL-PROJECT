@@ -6,6 +6,9 @@ public class Student {
         private String phone_Num;
         private String Email;
         private String home_place;
+        public Student(){
+
+        }
 
         public Student(String stu_ID, String stu_Name, String sex, String age, String phone_Num, String email, String home_place) {
             Stu_ID = stu_ID;
