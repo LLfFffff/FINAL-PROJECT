@@ -3,8 +3,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Administratorlogin extends JFrame implements ActionListener {
+public class register extends JFrame implements ActionListener{
     CheckUser checkUser = new CheckUser();
+
     private JPanel jp1;
     private JPanel jp2;
     private JPanel jp3;
@@ -13,10 +14,9 @@ public class Administratorlogin extends JFrame implements ActionListener {
     private JLabel jLabel;
     private JTextField Tusername;
     private JTextField Tpassword;
-    private JButton Login;
     private JButton register;
     private JButton quit;
-    public Administratorlogin(){
+    public register(){
         JFrame frame = new JFrame();
         jp1 = new JPanel();
         jp1.setLayout(null);
@@ -34,14 +34,12 @@ public class Administratorlogin extends JFrame implements ActionListener {
         jp1.add(Tpassword);
         jp2 = new JPanel();
         jp2.setLayout(new GridLayout(1,3));
-        Login = new JButton("Login");
         register = new JButton("register");
         quit = new JButton("quit");
-        jp2.add(Login);
         jp2.add(register);
         jp2.add(quit);
-        jLabel = new JLabel("Login");
         jp3 = new JPanel();
+        jLabel = new JLabel("Register an account");
         jp3.add(jLabel);
         frame.setLayout(new BorderLayout());
         frame.add(jp3,BorderLayout.NORTH);
@@ -54,37 +52,39 @@ public class Administratorlogin extends JFrame implements ActionListener {
         quit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               if(JOptionPane.showConfirmDialog(Administratorlogin.this,"are you sure to quit?")==JOptionPane.OK_OPTION){
-                   System.exit(0);
-               }
+                if(JOptionPane.showConfirmDialog(register.this,"are you sure to quit?")==JOptionPane.OK_OPTION){
+                    System.exit(0);
+                }
             }
         });
+        Administrator administrator = new Administrator();
         register.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String userN = Tusername.getText();
+                String passW = Tpassword.getText();
+                if(checkUser.find(userN)!=-1){
+                    JOptionPane.showMessageDialog(null, "The username has existed\n\nPlease re-enter");
+                    Tusername.setText("");
+                    Tpassword.setText("");
+                    return;
+                }
+
+                if(userN.equals("")){
+                    JOptionPane.showMessageDialog(null, "The username is empty\n\nPlease re-enter");
+                    return;
+                }
+                if(passW.equals("")){
+                    JOptionPane.showMessageDialog(null, "The password is empty\n\nPlease re-enter");
+                    return;
+                }
+                administrator.setUsername(userN);
+                administrator.setPassword(passW);
+                System.out.println("information"+administrator.fileString());
+                checkUser.insert(administrator);
+                JOptionPane.showMessageDialog(null, "registered successfully");
                 frame.setVisible(false);
-                new register();
-            }
-        });
-        Login.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String UserN = Tusername.getText();
-                String PassW = Tpassword.getText();
-                if(checkUser.find(UserN)!=-1&&checkUser.getAdministrator(checkUser.find(UserN)).getPassword().equals(PassW)) {
-                    JOptionPane.showMessageDialog(null, "Successful login");
-                    Tusername.setText("");
-                    Tpassword.setText("");
-                    return;
-                }
-                else if(checkUser.find(UserN)==-1||!checkUser.getAdministrator(checkUser.find(UserN)).getPassword().equals(PassW)){
-                    JOptionPane.showMessageDialog(null, "Login failed\n\nPlease input again");
-                    Tusername.setText("");
-                    Tpassword.setText("");
-                    return;
-                }
-
-
+                new Administratorlogin();
             }
         });
 

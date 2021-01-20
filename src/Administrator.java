@@ -18,10 +18,10 @@ public class Administrator {
         return password;
     }
 
-    public Administrator(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
+//    public Administrator(String username, String password) {
+//        this.username = username;
+//        this.password = password;
+//    }
     public String fileString() {
         return username + " " + password;
     }
