@@ -35,7 +35,7 @@ public  class StudentLogin extends JFrame implements  ActionListener{
     ArrayList<Student> arry=new ArrayList<>();
 
     public StudentLogin(){       //负责管理员登录的主窗口
-        super("Student Information Management System");
+        super("学生信息管理系统");
         stu_num=new JTextField(10);//Objects that create text messages
         name=new JTextField(10);
         phone_number=new JTextField(15);
@@ -44,13 +44,13 @@ public  class StudentLogin extends JFrame implements  ActionListener{
         email=new JTextField(18);
 
         group=new ButtonGroup();
-        male=new JRadioButton("male");//Initializes the checkbox,
-        female=new JRadioButton("female");
+        male=new JRadioButton("男");//Initializes the checkbox,
+        female=new JRadioButton("女");
         group.add(male);//Add a button to the button group
         group.add(female);
-        search=new JButton("Search for information about eligible students");
-        show=new JButton("Display all student information");
-        back=new JButton("Back to the login screen");
+        search=new JButton("搜索符合的学生");
+        show=new JButton("显示所有学生的信息");
+        back=new JButton("返回登录界面");
 
         pb=new JPanel();
         pb.add(lb1,JLabel.CENTER);
@@ -58,27 +58,27 @@ public  class StudentLogin extends JFrame implements  ActionListener{
         p1=new JPanel();//Create a panel
 
         p1.add(lb2,JLabel.CENTER);
-        p1.add(new JLabel("stu_num:",JLabel.CENTER));
+        p1.add(new JLabel("学生id:",JLabel.CENTER));
         p1.add(stu_num);
 
         p2=new JPanel();
-        p2.add(new JLabel("name:",JLabel.CENTER));
+        p2.add(new JLabel("姓名:",JLabel.CENTER));
         p2.add(name);
         p3=new JPanel();
-        p3.add(new JLabel("sex:",JLabel.CENTER));
+        p3.add(new JLabel("性别:",JLabel.CENTER));
         p3.add(male);
         p3.add(female);
         p4=new JPanel();
-        p4.add(new JLabel("age:",JLabel.CENTER));
+        p4.add(new JLabel("年龄:",JLabel.CENTER));
         p4.add(age);
         p5=new JPanel();
-        p5.add(new JLabel("phone_number:",JLabel.CENTER));
+        p5.add(new JLabel("电话号码:",JLabel.CENTER));
         p5.add(phone_number);
         p6=new JPanel();
-        p6.add(new JLabel("home_place:",JLabel.CENTER));
+        p6.add(new JLabel("家庭住址:",JLabel.CENTER));
         p6.add(home_place);
         p7=new JPanel();
-        p7.add(new JLabel("email:",JLabel.CENTER));
+        p7.add(new JLabel("电子邮箱:",JLabel.CENTER));
         p7.add(email);
 
         pv=new JPanel();

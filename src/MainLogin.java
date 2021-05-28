@@ -13,15 +13,15 @@ public class MainLogin extends JFrame implements ActionListener {
     static JFrame frame;
 
     public MainLogin() {
-        frame = new JFrame("Main Login: Please Login!");
+        frame = new JFrame("Main Login: 请先登录!");
         frame.setLayout(new GridLayout(3, 1));
         jp1 = new JPanel();
-        JLabel jlabel = new JLabel("please choose your identity");
+        JLabel jlabel = new JLabel("请选择你的登录身份");
         jp1.add(jlabel);
         jp2 = new JPanel();
         jp3 = new JPanel();
-        button1 = new JButton("administrators");
-        button2 = new JButton("student");
+        button1 = new JButton("管理员");
+        button2 = new JButton("学生");
         jp2 = new JPanel();
         jp2.add(button1);
         jp2.add(button2);

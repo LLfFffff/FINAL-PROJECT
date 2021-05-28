@@ -20,8 +20,8 @@ public class register extends JFrame implements ActionListener{
         JFrame frame = new JFrame();
         jp1 = new JPanel();
         jp1.setLayout(null);
-        username = new JLabel("username");
-        password = new JLabel("password");
+        username = new JLabel("用户名");
+        password = new JLabel("密码");
         Tusername = new JTextField(20);
         Tpassword = new JTextField(20);
         username.setBounds(20, 20, 100, 25);
@@ -34,12 +34,12 @@ public class register extends JFrame implements ActionListener{
         jp1.add(Tpassword);
         jp2 = new JPanel();
         jp2.setLayout(new GridLayout(1,3));
-        register = new JButton("register");
-        quit = new JButton("quit");
+        register = new JButton("注册");
+        quit = new JButton("退出");
         jp2.add(register);
         jp2.add(quit);
         jp3 = new JPanel();
-        jLabel = new JLabel("Register an account");
+        jLabel = new JLabel("注册一个账号");
         jp3.add(jLabel);
         frame.setLayout(new BorderLayout());
         frame.add(jp3,BorderLayout.NORTH);
