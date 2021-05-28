@@ -75,6 +75,8 @@ public class Administratorlogin extends JFrame implements ActionListener {
                     JOptionPane.showMessageDialog(null, "Successful login");
                     Tusername.setText("");
                     Tpassword.setText("");
+                    new ManagerLogin();
+                    frame.setVisible(false);
                     return;
                 }
                 else if(checkUser.find(UserN)==-1||!checkUser.getAdministrator(checkUser.find(UserN)).getPassword().equals(PassW)){

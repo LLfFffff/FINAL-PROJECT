@@ -43,7 +43,7 @@ public class MainLogin extends JFrame implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                //new studentLogin();
+                new StudentLogin();
             }
         });
 

@@ -24,7 +24,7 @@ public class showones {
         //The string array f is used to record the conditions that need to be queried
         String [] f = new String [7];
         try{
-            FileReader f1 = new FileReader("temporary .txt");
+            FileReader f1 = new FileReader("temporary.txt");
             BufferedReader br=new BufferedReader(f1);
 
             String t=null;
