@@ -10,6 +10,7 @@ import java.util.Hashtable;
 public class ManagerLogin extends JFrame implements  ActionListener{
 
     Function fun=new Function();
+    StudentDao studentDao = new StudentDao();
 
     //Define the components
     JLabel lb1=new JLabel("The current information manager login interface" );//JLabel can display text, images
@@ -157,8 +158,9 @@ public class ManagerLogin extends JFrame implements  ActionListener{
                 System.out.println("Administrator");
                 System.out.println(stu.toString());
 
-                fun.add(stu);
-                fun.writefile();
+//                fun.add(stu);
+//                fun.writefile();
+                studentDao.add(stu);
 
                 JOptionPane.showMessageDialog(null, "Add successfully！！！");
 
