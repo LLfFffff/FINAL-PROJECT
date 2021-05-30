@@ -9,27 +9,29 @@ public class StudentDao {
     private Connection conn = null;
     private Statement stat = null;
 
-
-    public boolean add(Student stu) {
-        return false;
-    }
-
+    /**
+     * 根据id获取学生信息
+     *
+     * @param studentId 学生id
+     * @return 学生信息，如果不存在则返回null
+     */
     public Student findByStudentId(int studentId) {
         try {
             //注册JDBC驱动
             Class.forName(JDBC_DRIVER);
 
             //打开链接
-            System.out.println("连接数据库...");
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
             //执行查询
-            System.out.println("实例化statement对象");
             stat = conn.createStatement();
             String sql;
             sql = "SELECT id,name,sex,age,home_place,phone_number,email FROM stu_mess WHERE id=" + studentId;
+
             ResultSet rs = stat.executeQuery(sql);
-            if(rs.next()) {
+            System.out.println("查询学生信息，id：" + studentId);
+
+            if (rs.next()) {
                 String id = rs.getString("id");
                 String name = rs.getString("name");
                 String sex = rs.getString("sex");
@@ -37,15 +39,81 @@ public class StudentDao {
                 String homePlace = rs.getString("home_place");
                 String phoneNumber = rs.getString("phone_number");
                 String email = rs.getString("email");
-                System.out.println(age);
-                return new Student(id,name,sex,age,phoneNumber,email,homePlace);
+                return new Student(id, name, sex, age, phoneNumber, email, homePlace);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (stat != null) {
+                    stat.close();
+                }
+            } catch (SQLException se) {
+                //什么都不做
+            }
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
         }
 
         return null;
+    }
+
+    /**
+     * 添加学生信息
+     *
+     * @param stu
+     * @return
+     */
+    public boolean add(Student stu) {
+        System.out.println("添加学生信息");
+        System.out.println(stu.toString());
+        try {
+            //注册JDBC驱动
+            Class.forName(JDBC_DRIVER);
+
+            //打开链接
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            //执行查询
+            stat = conn.createStatement();
+            String sql;
+            sql = "INSERT INTO stu_mess (name,sex,age,home_place,phone_number,email) VALUES (?,?,?,?,?,?)";
+            //预编译sql语句
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            psmt.setString(1,stu.getStu_Name());
+            psmt.setInt(2,stu.getStuSex());
+            psmt.setInt(3,stu.getStuAge());
+            psmt.setString(4,stu.getHome_place());
+            psmt.setString(5,stu.getPhone_Num());
+            psmt.setString(6,stu.getEmail());
+            psmt.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (stat != null) {
+                    stat.close();
+                }
+            } catch (SQLException se) {
+                //什么都不做
+            }
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return true;
     }
 }

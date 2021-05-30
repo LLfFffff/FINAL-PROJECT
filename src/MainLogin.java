@@ -52,10 +52,9 @@ public class MainLogin extends JFrame implements ActionListener {
 
 
     public static void main(String[] args) {
-        MainLogin mainLogin = new MainLogin();
+        new MainLogin();
         StudentDao studentDao = new StudentDao();
-        Student stu = studentDao.findByStudentId(1);
-        System.out.println(stu.toString());
+        studentDao.add(new Student("a","a","1","1","a","a","a"));
     }
 
     @Override
