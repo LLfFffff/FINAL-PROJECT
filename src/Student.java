@@ -14,6 +14,7 @@ public class Student {
             Stu_ID = stu_ID;
             Stu_Name = stu_Name;
             this.sex = sex;
+            this.age = age;
             this.phone_Num = phone_Num;
             Email = email;
             this.home_place = home_place;
@@ -75,7 +76,8 @@ public class Student {
             this.home_place = home_place;
         }
 
-        public String fileString() {
+        @Override
+        public String toString(){
             return Stu_ID + " " + Stu_Name + " " + sex + " " + age + "  " + phone_Num + "  " + Email + "  " + home_place;
         }
 

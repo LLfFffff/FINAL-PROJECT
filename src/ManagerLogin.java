@@ -155,7 +155,7 @@ public class ManagerLogin extends JFrame implements  ActionListener{
 
 
                 System.out.println("Administrator");
-                System.out.println(stu.fileString());
+                System.out.println(stu.toString());
 
                 fun.add(stu);
                 fun.writefile();

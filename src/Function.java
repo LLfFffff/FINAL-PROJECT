@@ -12,7 +12,7 @@ import java.util.ArrayList;
 class Function {
 
     //The number of students in this program is not large, with ArrayList ArrayList, when the student data is much, consider using a linked list
-    ArrayList<Student> arry=new ArrayList<Student>();
+    ArrayList<Student> array =new ArrayList<Student>();
     public Function()           //Read the file and store the student information in the file in the array list
     {
         this.readfile();
@@ -20,8 +20,8 @@ class Function {
     //Search student information according to student number, find returned student number, cannot find return -1
     public int find(String str)
     {
-        for (int i = 0; i<arry.size(); i++)
-            if (arry.get(i).getStu_ID().equals(str))
+        for (int i = 0; i< array.size(); i++)
+            if (array.get(i).getStu_ID().equals(str))
                 return i;//Is equal to the position in the array list
         return -1;
     }
@@ -29,7 +29,7 @@ class Function {
     //Modify student information
     public void update(Student stu) {
         int flag=find(stu.getStu_ID());    //Find out if it exists
-        arry.set(flag, stu);		   //Replace the student information in the flag
+        array.set(flag, stu);		   //Replace the student information in the flag
     }
     //read file
     public boolean readfile() {
@@ -37,12 +37,12 @@ class Function {
         try{
             FileReader f1 = new FileReader("student.txt");
             BufferedReader br=new BufferedReader(f1);
-            arry.clear();    //	Clear the data from the original array list
+            array.clear();    //	Clear the data from the original array list
             while ((t= br.readLine())!= null)
             {
                 String [] s=t.split("\\s+");
                 Student st=new Student(s[0],s[1],s[2],s[3],s[4],s[5],s[6]);//Note that if the file does not have seven strings per line, an error occurs
-                arry.add(st);
+                array.add(st);
                 System.out.println("readfile：");
                 System.out.println(s[0]);
             }
@@ -60,11 +60,11 @@ class Function {
     {
         System.out.println();
         System.out.println("Student to add");
-        System.out.println(stu.fileString());
+        System.out.println(stu.toString());
         System.out.println();
         if (find(stu.getStu_ID())!=-1)
             return false;
-        arry.add(stu);
+        array.add(stu);
         return true;
     }
 
@@ -76,10 +76,10 @@ class Function {
             fw = new FileWriter("student.txt");
             out = new BufferedWriter(fw);
 
-            for(int i=0;i<arry.size();i++){
-                String s=arry.get(i).fileString();
+            for(int i = 0; i< array.size(); i++){
+                String s= array.get(i).toString();
                 System.out.println("Arraylist data：");
-                System.out.println(arry.get(i).fileString());
+                System.out.println(array.get(i).toString());
                 out.write(s);
                 out.newLine();
             }
@@ -99,7 +99,7 @@ class Function {
         if (pos==-1)
             return false;
 
-        arry.remove(pos);
+        array.remove(pos);
         return true;
     }
 }
