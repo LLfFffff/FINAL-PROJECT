@@ -15,7 +15,7 @@ public class StudentDao {
      * @param studentId 学生id
      * @return 学生信息，如果不存在则返回null
      */
-    public Student findByStudentId(int studentId) {
+    public  Student findByStudentId(int studentId) {
         try {
             //注册JDBC驱动
             Class.forName(JDBC_DRIVER);
@@ -72,7 +72,7 @@ public class StudentDao {
      * @return 是否添加成功
      */
     public boolean add(Student stu) {
-        if(stu == null){
+        if (stu == null) {
             System.out.println("添加学生信息失败");
             return false;
         }
@@ -93,12 +93,12 @@ public class StudentDao {
 
             //预编译sql语句
             PreparedStatement psmt = conn.prepareStatement(sql);
-            psmt.setString(1,stu.getStu_Name());
-            psmt.setInt(2,stu.getStuSex());
-            psmt.setInt(3,stu.getStuAge());
-            psmt.setString(4,stu.getHome_place());
-            psmt.setString(5,stu.getPhone_Num());
-            psmt.setString(6,stu.getEmail());
+            psmt.setString(1, stu.getStu_Name());
+            psmt.setInt(2, stu.getStuSex());
+            psmt.setInt(3, stu.getStuAge());
+            psmt.setString(4, stu.getHome_place());
+            psmt.setString(5, stu.getPhone_Num());
+            psmt.setString(6, stu.getEmail());
             psmt.execute();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -123,5 +123,94 @@ public class StudentDao {
         return true;
     }
 
+    /**
+     * 修改学生信息
+     *
+     * @param stu 学生类（不可为null）
+     * @return 是否添加成功
+     */
+    public void update(Student stu) {
+        try {
+            //注册JDBC驱动
+            Class.forName(JDBC_DRIVER);
 
+            //打开链接
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            //执行查询
+            stat = conn.createStatement();
+            String sql = "update stu_mess set name=?,sex=?,age=?,home_place=?,phone_number=?,email=? where id=?";
+
+            PreparedStatement ptmt = conn.prepareStatement(sql);
+            ptmt.setString(1, stu.getStu_Name());
+            ptmt.setInt(2, stu.getStuSex());
+            ptmt.setInt(3, stu.getStuAge());
+            ptmt.setString(4, stu.getHome_place());
+            ptmt.setString(5, stu.getPhone_Num());
+            ptmt.setString(6, stu.getEmail());
+            ptmt.setString(7, stu.getStu_ID());
+            ptmt.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (stat != null) {
+                    stat.close();
+                }
+            } catch (SQLException se) {
+                //什么都不做
+            }
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+    }
+    public void delete(int stuID) {
+
+        try {
+            //注册JDBC驱动
+            Class.forName(JDBC_DRIVER);
+
+            //打开链接
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            //执行查询
+            stat = conn.createStatement();
+            String sql;
+            sql = "DELETE FROM stu_mess WHERE id=?";
+            System.out.println("删除学生信息");
+            System.out.println(stuID);
+
+            //预编译sql语句
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            psmt.setInt(1, stuID);
+            psmt.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (stat != null) {
+                    stat.close();
+                }
+            } catch (SQLException se) {
+                //什么都不做
+            }
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+
+    }
 }

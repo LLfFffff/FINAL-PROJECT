@@ -18,7 +18,7 @@ public class showones {
 
     //Display all student information
     public showones(String id) {
-        JFrame jf = new JFrame("Displaying eligible students' information");
+        JFrame jf = new JFrame("显示学生信息界面");
 
         JPanel panel = new JPanel();
 
@@ -113,7 +113,7 @@ public class showones {
         int t = arry.size();
         //int t=table.getRowCount();
         if (t <= 0) {
-            JOptionPane.showMessageDialog(null, "There are no eligible students in the system！！！");
+            JOptionPane.showMessageDialog(null, "系统中没有符合的学生！！！");
             jf.setVisible(false);
         } else {
             jf.setVisible(true);

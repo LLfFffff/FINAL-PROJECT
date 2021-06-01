@@ -4,6 +4,7 @@ import java.awt.event.*;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.*;/*ArrayList;
 import java.util.Hashtable;
 */
@@ -253,26 +254,27 @@ public class ManagerLogin extends JFrame implements  ActionListener{
         delete.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String sID = stu_num.getText();
-                int flag=fun.find(sID);
-                if(flag==-1)
-                {
-                    JOptionPane.showMessageDialog(null, "Did not find the student number of the student!! \\n\\n Please retype");
+                if (sID.equals("")) {
+                    JOptionPane.showMessageDialog(null, "学号为空!! \\n\\n请重新输入");
+                } else {
+                    Student flag = studentDao.findByStudentId(Integer.parseInt(sID));
+                    if (flag == null) {
+                        JOptionPane.showMessageDialog(null, "未找到该学号!! \\n\\n请重新输入");
+                    } else {
+                        studentDao.delete(Integer.parseInt(sID));
+                        JOptionPane.showMessageDialog(null, "删除成功！！！\n");
+                    }
+
+
+                    stu_num.setText("");
+                    name.setText("");
+                    age.setText("");
+                    phone_number.setText("");
+                    home_place.setText("");
+                    email.setText("");
+                    group.clearSelection();
+
                 }
-                else {
-                    fun.delete(sID);
-                    fun.writefile();
-                    JOptionPane.showMessageDialog(null, "Delete successfully！！！\n");
-                }
-
-
-                stu_num.setText("");
-                name.setText("");
-                age.setText("");
-                phone_number.setText("");
-                home_place.setText("");
-                email.setText("");
-                group.clearSelection();
-
             }
         });
 
@@ -280,61 +282,62 @@ public class ManagerLogin extends JFrame implements  ActionListener{
         update.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String sID = stu_num.getText();
-                int flag=fun.find(sID);    //Find out if it exists
-                if (flag==-1)
-                {
-                    JOptionPane.showMessageDialog(null, "Did not find the student number of the student!! \\n\\n Please retype");
-                    return;
+                if (sID.equals("")) {
+                    JOptionPane.showMessageDialog(null, "学号为空!! \\n\\n请重新输入");
+                } else {
+                    Student flag = studentDao.findByStudentId(Integer.parseInt(sID));    //Find out if it exists
+                    if (flag == null) {
+                        JOptionPane.showMessageDialog(null, "未找到该学号的学生!! \\n\\n 请重新输入");
+                        return;
+                    } else
+                        JOptionPane.showMessageDialog(null, "学生数据 \\n\\n 存在.点击确认后修改信息");
+
+                    String sage = age.getText();
+                    if (sage.equals(""))
+                        return;
+                    String scall = phone_number.getText();
+                    if (scall.equals(""))
+                        return;
+                    String shome = home_place.getText();
+                    if (shome.equals(""))
+                        return;
+                    String siden = email.getText();
+                    if (siden.equals(""))
+                        return;
+                    String ssex = null;
+                    if (male.isSelected()) {
+                        ssex = male.getText();
+                    } else {
+                        ssex = female.getText();
+                    }
+                    String sname = name.getText();
+
+                    if (sname.equals("")) {
+                        JOptionPane.showMessageDialog(null, "学生姓名为空!! \\n\\n 请重新输入");
+                        return;
+                    }
+
+                    stu.setStu_ID(sID);
+                    stu.setAge(sage);
+                    stu.setStu_Name(sname);
+                    stu.setSex(ssex);
+                    stu.setPhone_Num(scall);
+                    stu.setHome_place(shome);
+                    stu.setEmail(siden);
+
+//                fun.update(stu);
+//                fun.writefile();
+                    studentDao.update(stu);
+                    JOptionPane.showMessageDialog(null, "更新成功！！！");
+
+                    stu_num.setText("");
+                    name.setText("");
+                    age.setText("");
+                    phone_number.setText("");
+                    home_place.setText("");
+                    email.setText("");
+                    group.clearSelection();
                 }
-                else
-                    JOptionPane.showMessageDialog(null, "The student data \\n\\n exists in the system. Please input the modified data after confirming the return");
-
-                String sage = age.getText();
-                if(sage.equals(""))
-                    sage="--";
-                String scall = phone_number.getText();
-                if(scall.equals(""))
-                    scall="--";
-                String shome = home_place.getText();
-                if(shome.equals(""))
-                    shome="--";
-                String siden = email.getText();
-                if(siden.equals(""))
-                    siden="--";
-                String ssex=null;
-                if(male.isSelected()){
-                    ssex=male.getText();
-                }
-                else{
-                    ssex=female.getText();
-                }
-                String sname = name.getText();
-
-                if(sname.equals(""))
-                {
-                    JOptionPane.showMessageDialog(null, "Input student name is empty!! \\n\\n Please retype");
-                    return;
-                }
-
-                stu.setStu_ID(sID);
-                stu.setAge(sage);
-                stu.setStu_Name(sname);
-                stu.setSex(ssex);
-                stu.setPhone_Num(scall);
-                stu.setHome_place(shome);
-                stu.setEmail(siden);
-
-                fun.update(stu);
-                fun.writefile();
-                JOptionPane.showMessageDialog(null, "Update successfully！！！");
-
-                stu_num.setText("");
-                name.setText("");
-                age.setText("");
-                phone_number.setText("");
-                home_place.setText("");
-                email.setText("");
-                group.clearSelection();
             }
         });
 

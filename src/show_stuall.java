@@ -85,7 +85,7 @@ public class show_stuall {
         jf.setLocationRelativeTo(null);
         int t=table.getRowCount();
         if(t<=0){
-            JOptionPane.showMessageDialog(null, "Student information has not yet been entered into the system！！！");
+            JOptionPane.showMessageDialog(null, "学生信息尚未被录入系统！！！");
             jf.setVisible(false);
         }
         else {
