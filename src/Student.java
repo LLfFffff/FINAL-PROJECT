@@ -82,7 +82,7 @@ public class Student {
     }
 
     public int getStuSex(){
-        if(sex == "male"){
+        if("male".equals(sex)){
             return 1;
         }else {
             return 0;

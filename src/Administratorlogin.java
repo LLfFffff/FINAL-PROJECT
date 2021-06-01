@@ -76,7 +76,7 @@ public class Administratorlogin extends JFrame implements ActionListener {
                 boolean loginRes = adminDao.verifyAccount(UserN, PassW);
 
                 if (loginRes) {
-                    JOptionPane.showMessageDialog(null, "登陆成功");
+//                    JOptionPane.showMessageDialog(null, "登陆成功");
                     Tusername.setText("");
                     Tpassword.setText("");
                     new ManagerLogin();
