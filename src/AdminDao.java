@@ -3,7 +3,7 @@ import java.sql.*;
 public class AdminDao {
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     //数据库地址
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/student_management";
+    private static final String DB_URL = "jdbc:mysql://cn5.frp.cool:13306/student_management";
     private static final String USER = "root";
     private static final String PASS = "canwe233";
     private Connection conn = null;

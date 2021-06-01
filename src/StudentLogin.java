@@ -173,7 +173,7 @@ public  class StudentLogin extends JFrame implements  ActionListener{
 
                 }
                 //Began to query
-                new showones();
+                new showones(null);
 
                 //Clear the textbox
                 stu_num.setText("");

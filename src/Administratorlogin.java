@@ -87,7 +87,7 @@ public class Administratorlogin extends JFrame implements ActionListener {
                     Tpassword.setText("");
                 }
                 return;
-                
+
             }
         });
 

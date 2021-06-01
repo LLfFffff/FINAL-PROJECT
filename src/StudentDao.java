@@ -3,7 +3,7 @@ import java.sql.*;
 public class StudentDao {
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     //数据库地址
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/student_management";
+    private static final String DB_URL = "jdbc:mysql://cn5.frp.cool:13306/student_management";
     private static final String USER = "root";
     private static final String PASS = "canwe233";
     private Connection conn = null;
@@ -26,7 +26,7 @@ public class StudentDao {
             //执行查询
             stat = conn.createStatement();
             String sql;
-            sql = "SELECT id,name,sex,age,home_place,phone_number,email FROM stu_mess WHERE id=" + studentId;
+            sql = "SELECT * FROM stu_mess WHERE id=" + studentId;
 
             ResultSet rs = stat.executeQuery(sql);
             System.out.println("查询学生信息，id：" + studentId);
@@ -122,4 +122,6 @@ public class StudentDao {
         }
         return true;
     }
+
+
 }

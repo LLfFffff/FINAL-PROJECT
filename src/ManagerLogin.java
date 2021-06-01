@@ -233,7 +233,7 @@ public class ManagerLogin extends JFrame implements  ActionListener{
 
                 }
                 //Began to query
-                new showones();
+                new showones(sID);
 
                 //Clear the textbox
                 stu_num.setText("");
