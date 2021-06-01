@@ -16,7 +16,8 @@ public class Administratorlogin extends JFrame implements ActionListener {
     private JButton Login;
     private JButton register;
     private JButton quit;
-    public Administratorlogin(){
+
+    public Administratorlogin() {
         JFrame frame = new JFrame();
         jp1 = new JPanel();
         jp1.setLayout(null);
@@ -33,7 +34,7 @@ public class Administratorlogin extends JFrame implements ActionListener {
         jp1.add(password);
         jp1.add(Tpassword);
         jp2 = new JPanel();
-        jp2.setLayout(new GridLayout(1,3));
+        jp2.setLayout(new GridLayout(1, 3));
         Login = new JButton("登录");
         register = new JButton("注册");
         quit = new JButton("退出");
@@ -44,19 +45,19 @@ public class Administratorlogin extends JFrame implements ActionListener {
         jp3 = new JPanel();
         jp3.add(jLabel);
         frame.setLayout(new BorderLayout());
-        frame.add(jp3,BorderLayout.NORTH);
-        frame.add(jp1,BorderLayout.CENTER);
-        frame.add(jp2,BorderLayout.SOUTH);
-        frame.setSize(500,350);
+        frame.add(jp3, BorderLayout.NORTH);
+        frame.add(jp1, BorderLayout.CENTER);
+        frame.add(jp2, BorderLayout.SOUTH);
+        frame.setSize(500, 350);
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);//Display in the middle of the screen (center display)
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//Exit and close JFrame
         quit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               if(JOptionPane.showConfirmDialog(Administratorlogin.this,"确定退出?")==JOptionPane.OK_OPTION){
-                   System.exit(0);
-               }
+                if (JOptionPane.showConfirmDialog(Administratorlogin.this, "确定退出?") == JOptionPane.OK_OPTION) {
+                    System.exit(0);
+                }
             }
         });
         register.addActionListener(new ActionListener() {
@@ -71,25 +72,24 @@ public class Administratorlogin extends JFrame implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 String UserN = Tusername.getText();
                 String PassW = Tpassword.getText();
-                if(checkUser.find(UserN)!=-1&&checkUser.getAdministrator(checkUser.find(UserN)).getPassword().equals(PassW)) {
+                AdminDao adminDao = new AdminDao();
+                boolean loginRes = adminDao.verifyAccount(UserN, PassW);
+
+                if (loginRes) {
                     JOptionPane.showMessageDialog(null, "登陆成功");
                     Tusername.setText("");
                     Tpassword.setText("");
                     new ManagerLogin();
                     frame.setVisible(false);
-                    return;
-                }
-                else if(checkUser.find(UserN)==-1||!checkUser.getAdministrator(checkUser.find(UserN)).getPassword().equals(PassW)){
+                } else {
                     JOptionPane.showMessageDialog(null, "登录失败\n\n请重新输入");
                     Tusername.setText("");
                     Tpassword.setText("");
-                    return;
                 }
-
-
+                return;
+                
             }
         });
-
 
 
     }
