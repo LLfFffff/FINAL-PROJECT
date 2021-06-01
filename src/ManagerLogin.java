@@ -123,7 +123,7 @@ public class ManagerLogin extends JFrame implements  ActionListener{
                 //First check whether the stu_num and name are empty. If so, exit directly
                 if(sID.equals("")||sname.equals(""))
                 {
-                    JOptionPane.showMessageDialog(null, "Input student number or name is empty!! \\n\\n Please retype");
+                    JOptionPane.showMessageDialog(null, "学生id或用户名为空!! \\n\\n 请重新输入");
                     return;
                 }
                 String sage = age.getText();
@@ -162,7 +162,7 @@ public class ManagerLogin extends JFrame implements  ActionListener{
 //                fun.writefile();
                 studentDao.add(stu);
 
-                JOptionPane.showMessageDialog(null, "Add successfully！！！");
+                JOptionPane.showMessageDialog(null, "添加成功！！！");
 
                 setVisible(false);
                 new ManagerLogin();

@@ -19,7 +19,7 @@ public class CheckUser {
         System.out.println();
 
         if(find(administrator.username)!=-1){
-            System.out.println("the user name already exists");
+            System.out.println("用户名已存在");
             return false;
         }
         list.add(administrator);

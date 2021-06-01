@@ -68,12 +68,15 @@ public class StudentDao {
     /**
      * 添加学生信息
      *
-     * @param stu
-     * @return
+     * @param stu 学生类（不可为null）
+     * @return 是否添加成功
      */
     public boolean add(Student stu) {
-        System.out.println("添加学生信息");
-        System.out.println(stu.toString());
+        if(stu == null){
+            System.out.println("添加学生信息失败");
+            return false;
+        }
+
         try {
             //注册JDBC驱动
             Class.forName(JDBC_DRIVER);
@@ -85,6 +88,9 @@ public class StudentDao {
             stat = conn.createStatement();
             String sql;
             sql = "INSERT INTO stu_mess (name,sex,age,home_place,phone_number,email) VALUES (?,?,?,?,?,?)";
+            System.out.println("添加学生信息");
+            System.out.println(stu.toString());
+
             //预编译sql语句
             PreparedStatement psmt = conn.prepareStatement(sql);
             psmt.setString(1,stu.getStu_Name());

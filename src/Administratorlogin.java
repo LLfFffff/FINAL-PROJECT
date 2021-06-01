@@ -54,7 +54,7 @@ public class Administratorlogin extends JFrame implements ActionListener {
         quit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               if(JOptionPane.showConfirmDialog(Administratorlogin.this,"are you sure to quit?")==JOptionPane.OK_OPTION){
+               if(JOptionPane.showConfirmDialog(Administratorlogin.this,"确定退出?")==JOptionPane.OK_OPTION){
                    System.exit(0);
                }
             }
@@ -72,7 +72,7 @@ public class Administratorlogin extends JFrame implements ActionListener {
                 String UserN = Tusername.getText();
                 String PassW = Tpassword.getText();
                 if(checkUser.find(UserN)!=-1&&checkUser.getAdministrator(checkUser.find(UserN)).getPassword().equals(PassW)) {
-                    JOptionPane.showMessageDialog(null, "Successful login");
+                    JOptionPane.showMessageDialog(null, "登陆成功");
                     Tusername.setText("");
                     Tpassword.setText("");
                     new ManagerLogin();
@@ -80,7 +80,7 @@ public class Administratorlogin extends JFrame implements ActionListener {
                     return;
                 }
                 else if(checkUser.find(UserN)==-1||!checkUser.getAdministrator(checkUser.find(UserN)).getPassword().equals(PassW)){
-                    JOptionPane.showMessageDialog(null, "Login failed\n\nPlease input again");
+                    JOptionPane.showMessageDialog(null, "登录失败\n\n请重新输入");
                     Tusername.setText("");
                     Tpassword.setText("");
                     return;

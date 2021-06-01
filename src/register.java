@@ -52,7 +52,7 @@ public class register extends JFrame implements ActionListener{
         quit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(JOptionPane.showConfirmDialog(register.this,"are you sure to quit?")==JOptionPane.OK_OPTION){
+                if(JOptionPane.showConfirmDialog(register.this,"确定退出?")==JOptionPane.OK_OPTION){
                     System.exit(0);
                 }
             }
@@ -64,25 +64,30 @@ public class register extends JFrame implements ActionListener{
                 String userN = Tusername.getText();
                 String passW = Tpassword.getText();
                 if(checkUser.find(userN)!=-1){
-                    JOptionPane.showMessageDialog(null, "The username has existed\n\nPlease re-enter");
+                    JOptionPane.showMessageDialog(null, "用户名已存在\n\n请重新输入");
                     Tusername.setText("");
                     Tpassword.setText("");
                     return;
                 }
 
                 if(userN.equals("")){
-                    JOptionPane.showMessageDialog(null, "The username is empty\n\nPlease re-enter");
+                    JOptionPane.showMessageDialog(null, "用户名为空\n\n请重新输入");
                     return;
                 }
                 if(passW.equals("")){
-                    JOptionPane.showMessageDialog(null, "The password is empty\n\nPlease re-enter");
+                    JOptionPane.showMessageDialog(null, "密码为空\n\n请重新输入");
                     return;
                 }
                 administrator.setUsername(userN);
                 administrator.setPassword(passW);
+
+                //写入数据库
+                AdminDao adminDao = new AdminDao();
+                adminDao.add(userN,passW);
+
                 System.out.println("information"+administrator.fileString());
                 checkUser.insert(administrator);
-                JOptionPane.showMessageDialog(null, "registered successfully");
+                JOptionPane.showMessageDialog(null, "注册成功");
                 frame.setVisible(false);
                 new Administratorlogin();
             }
