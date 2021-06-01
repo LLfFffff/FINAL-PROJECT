@@ -60,4 +60,58 @@ public class AdminDao {
         }
         return true;
     }
+
+    /**
+     * 验证管理员账号密码
+     * @param account 账号
+     * @param pass 密码
+     * @return 账号密码是否正确
+     */
+    public boolean verifyAccount(String account,String pass){
+        if(account == null || pass == null){
+            return false;
+        }
+        boolean isLoginSuccessful = false;
+        try {
+            //注册JDBC驱动
+            Class.forName(JDBC_DRIVER);
+
+            //打开链接
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            //执行查询
+            stat = conn.createStatement();
+            String sql;
+            sql = "SELECT account,pass FROM admin_account WHERE account = " + account;
+            System.out.println("查询账号");
+
+            ResultSet rs = stat.executeQuery(sql);
+            if(rs.next()){
+                String truePass = rs.getString("pass");
+                if(pass.equals(truePass)){
+                    isLoginSuccessful = true;
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (stat != null) {
+                    stat.close();
+                }
+            } catch (SQLException se) {
+                //什么都不做
+            }
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return isLoginSuccessful;
+    }
 }
